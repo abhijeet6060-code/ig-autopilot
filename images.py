@@ -94,10 +94,7 @@ def _draw_top_bar(draw, th, handle, index, total):
     line_col = th["accent"]
     draw.line([(MARGIN + h_len + 20, 101), (MARGIN + h_len + 100, 101)], fill=line_col, width=2)
 
-    if total > 1:
-        label = f"{index}/{total}"
-        cw = draw.textlength(label, font=f_bar)
-        draw.text((W - MARGIN - cw, 85), label, font=f_bar, fill=alpha_fill)
+    # (Instagram's mobile app automatically overlays its own native 1/5 pill in the top right corner)
 
 
 def _slide_cover(th, hook, handle, index, total):
