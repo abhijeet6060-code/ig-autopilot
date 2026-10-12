@@ -1,0 +1,67 @@
+name: ig-autopilot
+
+on:
+  schedule:
+    - cron: "30 3 * * *"    # 09:00 IST
+    - cron: "30 13 * * *"   # 19:00 IST
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Draft only (do not post)"
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ig-autopilot
+  cancel-in-progress: false
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      - name: Run pipeline
+        env:
+          LLM_PROVIDER: gemini
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO_BRANCH: ${{ github.event.repository.default_branch }}
+          UPLOADER: github
+          IG_HANDLE: "@abhijeetkumar.founder"
+          AUTO_POST: "true"
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.dry_run }}" = "true" ]; then
+            python main.py --once --dry-run
+          else
+            python main.py --once
+          fi
+
+      - name: Upload drafts for review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: drafts
+          path: output/
+          if-no-files-found: ignore
+
+      - name: Save state
+        if: always()
+        run: |
+          git config user.name "ig-autopilot"
+          git config user.email "bot@users.noreply.github.com"
+          git add state.json
+          git diff --cached --quiet || (git commit -m "update state" && git pull --rebase && git push)

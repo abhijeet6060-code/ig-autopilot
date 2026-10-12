@@ -1,0 +1,12 @@
+{
+  "posts": [
+    {
+      "source_url": "https://twitter.com/karpathy/status/2109361546505966046",
+      "title": "The gap in shared understanding of LLM capability is widening",
+      "caption": "There are now two distinct groups in most companies: people building with LLMs daily, and people who only read headlines about them.\n\nThe gap in understanding what these models can actually do is widening. On one end, leaders expect flawless autonomous agents. On the other, skeptics write off the technology as unreliable autocomplete.\n\nBoth extremes stall execution. Overestimating capabilities leads to fragile products that break in production. Underestimating them leaves obvious operational leverage on the table.\n\nThe only way forward is shared context. Put raw model inputs, messy edge cases, and concrete task evaluations directly in front of decision-makers.\n\nIs your organization currently over-promising on AI, or under-utilizing it?\n\nSource: Hacker News\n\n#artificialintelligence #startups #productmanagement #techfounders #llm #generativeai #operations #softwareengineering",
+      "media_id": null,
+      "status": "draft",
+      "created_at": 1791823058.8054473
+    }
+  ]
+}
