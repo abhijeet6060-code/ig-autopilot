@@ -39,6 +39,9 @@ def _fetch_ai_background(prompt):
         r = requests.get(url, timeout=30)
         if r.ok and len(r.content) > 10000:
             img = Image.open(io.BytesIO(r.content)).convert("RGBA")
+            # Crop off bottom 6% to completely remove watermark
+            w, h = img.size
+            img = img.crop((0, 0, w, int(h * 0.94)))
             return img.resize((W, H), Image.Resampling.LANCZOS)
     except Exception as e:
         print(f"[images] AI bg fetch fallback: {e}")
