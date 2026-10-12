@@ -24,14 +24,33 @@ Return JSON with exactly this shape:
 {{
   "skip": false,
   "chosen_index": <int index from the list>,
-  "cover_hook": "<max 12 words, scroll-stopping, honest>",
+  "image_prompt": "<cinematic 3D render description for background visual, e.g. futuristic digital art of founder looking at glowing holographic AI brain in dark space with neon cyan particles, 8k octane render>",
+  "cover_hook": "<max 12 words, scroll-stopping headline, honest>",
+  "cover_highlight_cyan": "<1-3 words from cover_hook to highlight in glowing cyan>",
+  "cover_highlight_orange": "<1-3 words from cover_hook to highlight in glowing orange>",
+  "cards": [
+    {{"icon": "doc", "line1": "Reads &", "line2": "understands docs"}},
+    {{"icon": "lightbulb", "line1": "Solves complex", "line2": "problems"}},
+    {{"icon": "code", "line1": "Writes", "line2": "code"}},
+    {{"icon": "doc", "line1": "Creates visuals", "line2": "& designs"}},
+    {{"icon": "chat", "line1": "Holds natural", "line2": "dialogue"}},
+    {{"icon": "globe", "line1": "Searches &", "line2": "researches live"}},
+    {{"icon": "calendar", "line1": "Automates multi-", "line2": "step tasks"}},
+    {{"icon": "chart", "line1": "Finds data", "line2": "& insights"}}
+  ],
+  "doodle_note": "<short provocative 1-line thought, max 7 words>",
+  "footer_takeaway": "<bold 1-line truth, max 7 words>",
+  "footer_subtext": "<1-line explanation, max 10 words>",
   "slides": [
-    {{"title": "<max 7 words>", "body": "<max 28 words>"}}
+    {{"tag": "WHAT HAPPENED", "title": "<max 7 words>", "body": "<max 35 words>", "takeaway": "<1-line key point, max 12 words>"}},
+    {{"tag": "WHY IT MATTERS", "title": "<max 7 words>", "body": "<max 35 words>", "takeaway": "<1-line key point, max 12 words>"}},
+    {{"tag": "ACTION PLAYBOOK", "title": "<max 7 words>", "body": "<max 35 words>", "takeaway": "<1-line key point, max 12 words>"}}
   ],
   "caption": "<hook line, 2-4 short paragraphs, question to drive comments, max 1500 chars>",
   "hashtags": ["<6 to 10 relevant hashtags without #>"]
 }}
 
+"cards" must have 6 to 8 items summarizing the key dimensions or capabilities.
 "slides" must have 3 to 5 items covering: what happened, why it matters, what to do about it.
 If none of the stories are good or safe to post about, return {{"skip": true}}."""
 
