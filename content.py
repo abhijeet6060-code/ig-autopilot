@@ -2,6 +2,7 @@
 Default provider is Google Gemini's free tier; Claude is optional."""
 import json
 import re
+import time
 
 import requests
 
@@ -56,20 +57,35 @@ If none of the stories are good or safe to post about, return {{"skip": true}}."
 
 
 def _gemini(system, prompt):
-    r = requests.post(
-        f"https://generativelanguage.googleapis.com/v1beta/models/{config.GEMINI_MODEL}:generateContent",
-        headers={"x-goog-api-key": config.require("GEMINI_API_KEY"), "Content-Type": "application/json"},
-        json={
-            "systemInstruction": {"parts": [{"text": system}]},
-            "contents": [{"role": "user", "parts": [{"text": prompt}]}],
-            "generationConfig": {"responseMimeType": "application/json", "temperature": 0.7},
-        },
-        timeout=90,
-    )
-    if not r.ok:
-        raise RuntimeError(f"Gemini error {r.status_code}: {r.text[:300]}")
-    parts = r.json()["candidates"][0]["content"]["parts"]
-    return "".join(p.get("text", "") for p in parts)
+    api_key = config.require("GEMINI_API_KEY")
+    models_to_try = [config.GEMINI_MODEL, "gemini-flash-latest", "gemini-2.5-flash", "gemini-2.5-pro"]
+    seen = set()
+    models = [m for m in models_to_try if m and not (m in seen or seen.add(m))]
+
+    last_error = None
+    for model in models:
+        try:
+            r = requests.post(
+                f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent",
+                headers={"x-goog-api-key": api_key, "Content-Type": "application/json"},
+                json={
+                    "systemInstruction": {"parts": [{"text": system}]},
+                    "contents": [{"role": "user", "parts": [{"text": prompt}]}],
+                    "generationConfig": {"responseMimeType": "application/json", "temperature": 0.7},
+                },
+                timeout=90,
+            )
+            if r.status_code == 200:
+                parts = r.json()["candidates"][0]["content"]["parts"]
+                return "".join(p.get("text", "") for p in parts)
+            print(f"[content] Gemini {model} returned {r.status_code}, trying fallback model...")
+            last_error = f"Gemini error {r.status_code}: {r.text[:300]}"
+            time.sleep(2)
+        except Exception as e:
+            last_error = str(e)
+            time.sleep(1)
+
+    raise RuntimeError(f"All Gemini models failed: {last_error}")
 
 
 def _anthropic(system, prompt):
@@ -116,8 +132,9 @@ def generate(trends):
             data = _parse(_complete(system, prompt))
             _validate(data, len(trends))
             return data
-        except (ValueError, KeyError, json.JSONDecodeError) as e:
+        except Exception as e:
             last_err = e
+            time.sleep(2)
     raise RuntimeError(f"Could not get valid content after 3 tries: {last_err}")
 
 
