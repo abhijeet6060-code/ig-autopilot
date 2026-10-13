@@ -40,5 +40,5 @@ HANDLE = get("IG_HANDLE", "@abhijeetkumar.founder")
 BRAND_VOICE = get("BRAND_VOICE", "Sharp, practical, no hype.")
 AUTO_POST = flag("AUTO_POST", False)
 POST_TIMES = [t.strip() for t in get("POST_TIMES", "09:00,19:00").split(",") if t.strip()]
-MAX_POSTS_PER_DAY = int(get("MAX_POSTS_PER_DAY", "3"))
+MAX_POSTS_PER_DAY = int(get("MAX_POSTS_PER_DAY", "4"))
 OUTPUT_DIR = get("OUTPUT_DIR", "output")
