@@ -2,8 +2,8 @@ name: ig-autopilot
 
 on:
   schedule:
-    - cron: "30 3 * * *"    # 09:00 IST
-    - cron: "30 13 * * *"   # 19:00 IST
+    - cron: "35 3 * * *"    # 09:05 IST (offset to avoid GitHub Actions :30 traffic jam)
+    - cron: "35 13 * * *"   # 19:05 IST
   workflow_dispatch:
     inputs:
       dry_run:
