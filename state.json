@@ -111,6 +111,14 @@
       "media_id": "18145289875599065",
       "status": "published",
       "created_at": 1792255169.262678
+    },
+    {
+      "source_url": "https://www.reddit.com/r/artificial/comments/1x8f1kd/ai_lab_offers_free_plumbing_and_hvac_repairs/",
+      "title": "AI lab offers free plumbing and HVAC repairs across three cities to train AI robots",
+      "caption": "An AI lab is offering free plumbing and HVAC repairs across three cities to train AI robots.\n\nWhy? Because physical robotics has hit a massive data bottleneck.\n\nText models had the entire open internet to learn from. Humanoid and trade robots do not. You cannot scrape ten thousand hours of a technician fixing a rusted pipe inside a cramped 1950s crawlspace from Wikipedia.\n\nSimulations help, but reality has infinite edge cases: tight angles, stripped threads, and unpredictable debris. The fastest way to collect high-fidelity training data is putting sensors and cameras on skilled technicians doing actual jobs.\n\nIf labs are subsidizing expensive home repairs just to capture the telemetry, it shows how valuable physical training data has become. The next frontier of defensible AI moats will be built in the real world, not scraped online.\n\nWould you let an AI research team repair your home for free?\n\nSource: Reddit r/artificial\n\n#artificialintelligence #robotics #physicalai #skilledtrades #techtrends #futureofwork #deeptech",
+      "media_id": "18105029387619749",
+      "status": "published",
+      "created_at": 1792311554.474554
     }
   ]
 }
