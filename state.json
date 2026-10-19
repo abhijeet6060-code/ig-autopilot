@@ -135,6 +135,14 @@
       "media_id": "17966885727205520",
       "status": "published",
       "created_at": 1792401416.5984535
+    },
+    {
+      "source_url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxPNzJJdFg1b3FaTWRqLW1BV2R0WVBxWEliM1NWVHdZVzJLTE9YU3phcjRIRDRaMTdTMGttdkhCWUtzc1N5elVsRnM3VHJIRFFJdDVQRXpKeUduRG9VNFdrWjRSMnM3RmVIeGliWi1wSC00dkNnWEF3QkYwS3JwNGJUUEJTcnVQNnBUSHlXdGRZYmRPNGRscWppREllN0F2U1hJWGFvYTMwZjZ1VGs0cnc?oc=5",
+      "title": "Pegasus 1.5 from TwelveLabs is now available in Amazon Bedrock - Amazon Web Services (AWS)",
+      "caption": "Another advanced AI model just landed on a major cloud platform. What does it mean for your business?\n\nTwelveLabs' Pegasus 1.5 model is now accessible via Amazon Bedrock. This integration means companies already using AWS can experiment with or deploy this new AI capability without complex infrastructure setup.\n\nBedrock's value proposition is simplifying access to foundation models. The addition of Pegasus 1.5 expands the toolkit available to developers. This is a practical step towards making diverse AI models more broadly available for enterprise use cases.\n\nFor founders and business leaders, this trend is critical. It signifies the continued commoditization of AI model access. Focus shifts from building models to effectively applying them to solve real-world problems.\n\nHow are you evaluating new AI models for your business? Share your process below 👇\n\nSource: Google News: AI\n\n#AIforBusiness #AWSBedrock #TwelveLabs #FoundationModels #CloudAI #AIStrategy #TechNews #Innovation #EnterpriseAI #AIApplications",
+      "media_id": "17943655545094399",
+      "status": "published",
+      "created_at": 1792438219.8899856
     }
   ]
 }
