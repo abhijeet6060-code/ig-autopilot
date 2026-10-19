@@ -127,6 +127,14 @@
       "media_id": "17914995720524812",
       "status": "published",
       "created_at": 1792342283.8910162
+    },
+    {
+      "source_url": "https://arxiv.org/abs/2610.18861",
+      "title": "Hybrid Reasoning Agents: LLM agents that think in latent space, act through text",
+      "caption": "Most AI agents today reason out loud in plain text. Every intermediate step burns tokens, adds latency, and increases cost.\n\nA new framework called Hybrid Reasoning Agents proposes a smarter approach: let the model think directly in continuous latent space, and only produce text when an external action or answer is required.\n\nFor enterprise workflows, this could mean dramatically faster execution and significantly lower inference bills.\n\nWill latent reasoning replace verbose chain-of-thought for agentic systems?\n\nSource: Hacker News\n\n#artificialintelligence #aiagents #machinelearning #techinnovation #llm #futureofwork #softwareengineering",
+      "media_id": "17966885727205520",
+      "status": "published",
+      "created_at": 1792401416.5984535
     }
   ]
 }
