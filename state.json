@@ -143,6 +143,14 @@
       "media_id": "17943655545094399",
       "status": "published",
       "created_at": 1792438219.8899856
+    },
+    {
+      "source_url": "https://news.ycombinator.com/item?id=50151036",
+      "title": "Ask HN: How to deal with shipping AI-written code you don't understand?",
+      "caption": "Is your team shipping AI-generated code they don't fully grasp? 🤔 This isn't a hypothetical. It's a growing challenge in tech, as highlighted by a recent Hacker News discussion.\n\nAI tools promise speed and efficiency, but they also introduce a new layer of complexity. When developers integrate code they haven't thoroughly reviewed or understood, they're not just saving time; they might be accumulating significant technical debt, introducing subtle bugs, or creating security vulnerabilities that are difficult to trace later.\n\nThe core issue isn't AI's capability, but our process around it. Relying on AI without critical oversight can erode code quality, complicate future maintenance, and make troubleshooting a nightmare. It's a trade-off between immediate velocity and long-term stability.\n\nHow are you ensuring your team understands and validates AI-generated code before it ships? Share your strategies below! 👇\n\nSource: Hacker News\n\n#AICode #TechDebt #SoftwareDevelopment #AIinBusiness #FounderLife #CodingTips #AIStrategy #DevOps #FutureofWork #TechLeadership",
+      "media_id": "18078297860729559",
+      "status": "published",
+      "created_at": 1792486277.7320292
     }
   ]
 }
