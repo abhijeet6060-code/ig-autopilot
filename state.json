@@ -151,6 +151,14 @@
       "media_id": "18078297860729559",
       "status": "published",
       "created_at": 1792486277.7320292
+    },
+    {
+      "source_url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxOTkZMdEpUSzJ3aWM3QmxFRVYwTGQyOFBlN0lUVDFOeGd3YWI4bkhMVm9OajNoMUk5ZnB1Rm1SV0NMSUdaM1ZockM2cGFWZ1NpbXMwNlFXWUxKcnYtRUxnaEtvcDJzX3NsSGJZclVFMXR3Q3ZmMERZYXZ4NzZ5T1UxdENXSXRXUjJuc1JtN3JqUUdoSDRTckozb0pRX291c0V1MEJDOU9mMA?oc=5",
+      "title": "Artificial intelligence-enabled triage tools may reflect human biases : Newsroom - UT Southwestern",
+      "caption": "AI is powerful, but it's not immune to human flaws.\n\nNew research highlights a critical challenge: AI-enabled triage tools may reflect human biases. This isn't just a technical glitch; it's a reflection of the data they're trained on, which often contains historical human inequalities.\n\nFor founders and business leaders, this has serious implications. Deploying biased AI, especially in sensitive areas like healthcare, can lead to unequal outcomes, erode user trust, and expose your company to significant ethical and legal risks.\n\nThe takeaway is clear: building AI requires more than just technical prowess. It demands a proactive approach to identifying and mitigating bias. This includes rigorous data auditing, diverse training sets, and continuous ethical oversight.\n\nHow are you integrating bias detection into your AI development pipeline?\n\nSource: Google News: AI\n\n#AIethics #AIBias #ResponsibleAI #TechForGood #FounderLessons #BusinessAI #DataScience #AIinHealthcare #StartupLife #FutureofWork",
+      "media_id": "18006322263005661",
+      "status": "published",
+      "created_at": 1792519634.9551597
     }
   ]
 }
