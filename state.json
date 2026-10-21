@@ -159,6 +159,14 @@
       "media_id": "18006322263005661",
       "status": "published",
       "created_at": 1792519634.9551597
+    },
+    {
+      "source_url": "https://news.ycombinator.com/item?id=50167583",
+      "title": "Launch HN: Respan (YC W24) – Open-source Rust AI gateway built around plugins",
+      "caption": "Tired of complex AI model management and vendor lock-in?\n\nRespan, an open-source AI gateway built in Rust, just launched. It's designed to streamline how businesses connect to and manage various AI models through a flexible plugin architecture. This means more control and less dependency on single providers.\n\nFor founders and technical leaders, this offers a practical way to build robust, scalable, and customizable AI infrastructure. Rust provides a strong foundation for performance and reliability, crucial for demanding AI workloads.\n\nHow are you currently managing your AI integrations? Share your challenges and strategies below.\n\nSource: Hacker News\n\n#AI #OpenSource #AIGateway #RustLang #TechInnovation #BusinessAI #AIStrategy #Infrastructure #YCStartup #FutureOfAI",
+      "media_id": "18132133144835918",
+      "status": "published",
+      "created_at": 1792572694.8491573
     }
   ]
 }
