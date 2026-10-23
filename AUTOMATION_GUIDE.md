@@ -211,14 +211,23 @@ $env:IG_ACCESS_TOKEN = $key
 
 ### Local Testing & Running
 ```powershell
-# Test a single cycle in Draft Mode (saves to output/)
-python main.py --once --dry-run
+# 1. Carousel Mode
+# Test a Carousel draft (saves 5 slides to output/)
+python main.py --once --dry-run --type carousel
 
-# Test a single cycle Live (publishes to Instagram)
-python main.py --once
+# Publish a Carousel live to Instagram
+python main.py --once --type carousel
 
-# Run as local daemon (runs on scheduled times continuously)
-python main.py --daemon
+# 2. Reels Mode (9:16 vertical 1080x1920 video with AI voice & kinetic captions)
+# Test a Reel draft (generates .mp4 in output/)
+python main.py --once --reel --dry-run
+
+# Publish a Reel live to Instagram
+python main.py --once --reel
+
+# 3. Daemon Mode (Local scheduled background runner)
+# Automatically publishes Carousel at morning (09:00) and Reel at evening (19:00)
+python main.py --daemon --type auto
 ```
 
 ### Git & Deployment Commands

@@ -142,3 +142,52 @@ def full_caption(data, source_name):
     tags = " ".join("#" + h.lstrip("#").replace(" ", "") for h in data["hashtags"][:10])
     cap = f"{data['caption'].strip()}\n\nSource: {source_name}\n\n{tags}"
     return cap[:2200]
+
+
+REEL_PROMPT = """Trending stories right now:
+{listing}
+
+Write an engaging, viral, high-retention 25-30 second Instagram Reel script for a founder audience.
+Rules:
+- Hook in the first 3 seconds (provocative question or bold counter-intuitive statement).
+- Short, spoken-style sentences (natural rhythm, punchy, zero fluff, no corporate buzzwords).
+- End with a fast takeaway and a question to prompt comments.
+- Output ONLY valid JSON, no markdown fences.
+
+Return JSON with exactly this shape:
+{{
+  "chosen_index": <int index from the list>,
+  "hook": "<dramatic hook line spoken in seconds 0-4>",
+  "sentences": [
+    "<sentence 1, what happened>",
+    "<sentence 2, why most people get it wrong>",
+    "<sentence 3, the real business implication>",
+    "<sentence 4, the actionable takeaway for founders>"
+  ],
+  "caption": "<engaging Instagram Reel caption with question, max 800 chars>",
+  "hashtags": ["<6 to 10 relevant hashtags without #>"]
+}}"""
+
+
+def generate_reel_script(trends):
+    listing = "\n".join(
+        f"[{i}] ({t.source}) {t.title}" + (f" - {t.summary[:200]}" if t.summary else "")
+        for i, t in enumerate(trends)
+    )
+    system = SYSTEM.format(voice=config.BRAND_VOICE, handle=config.HANDLE)
+    prompt = REEL_PROMPT.format(listing=listing)
+    last_err = None
+    for _ in range(3):
+        try:
+            data = _parse(_complete(system, prompt))
+            idx = data.get("chosen_index", 0)
+            if not isinstance(idx, int) or not (0 <= idx < len(trends)):
+                data["chosen_index"] = 0
+            if not data.get("hook") or not data.get("sentences"):
+                raise ValueError("Missing hook or sentences")
+            return data
+        except Exception as e:
+            last_err = e
+            time.sleep(2)
+    raise RuntimeError(f"Could not generate reel script after 3 tries: {last_err}")
+

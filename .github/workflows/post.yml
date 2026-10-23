@@ -7,9 +7,17 @@ on:
   workflow_dispatch:
     inputs:
       dry_run:
-        description: "Draft only (do not post)"
+        description: "Draft only (do not post to Instagram)"
         type: boolean
-        default: true
+        default: false
+      post_type:
+        description: "Content format to publish"
+        type: choice
+        options:
+          - reel
+          - carousel
+          - auto
+        default: reel
 
 permissions:
   contents: write
@@ -44,10 +52,21 @@ jobs:
           IG_HANDLE: "@abhijeetkumar.founder"
           AUTO_POST: "true"
         run: |
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.dry_run }}" = "true" ]; then
-            python main.py --once --dry-run
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            DRY_FLAG=""
+            if [ "${{ inputs.dry_run }}" = "true" ]; then
+              DRY_FLAG="--dry-run"
+            fi
+            python main.py --once $DRY_FLAG --type "${{ inputs.post_type }}"
           else
-            python main.py --once
+            HOUR=$(date -u +%H)
+            if [ "$HOUR" -ge 12 ]; then
+              echo "Evening run detected: Generating and publishing Reel..."
+              python main.py --once --type reel
+            else
+              echo "Morning run detected: Generating and publishing Carousel..."
+              python main.py --once --type carousel
+            fi
           fi
 
       - name: Upload drafts for review

@@ -47,3 +47,15 @@ def publish(image_urls, caption):
                           children=",".join(children), caption=caption)["id"]
     _wait_ready(container)
     return _call("POST", f"{ig}/media_publish", creation_id=container)["id"]
+
+
+def publish_reel(video_url, caption):
+    ig = config.require("IG_USER_ID")
+    container = _call("POST", f"{ig}/media",
+                      media_type="REELS",
+                      video_url=video_url,
+                      caption=caption,
+                      share_to_feed="true")["id"]
+    _wait_ready(container, timeout=180)
+    return _call("POST", f"{ig}/media_publish", creation_id=container)["id"]
+
