@@ -226,7 +226,13 @@ def render_reel(script_data, handle, out_dir):
         except Exception:
             pass
 
-    _, stderr_bytes = proc.communicate()
+    stderr_bytes = b""
+    if proc.stderr:
+        try:
+            stderr_bytes = proc.stderr.read()
+        except Exception:
+            pass
+    proc.wait()
     if proc.returncode != 0:
         err_msg = stderr_bytes.decode(errors="replace") if stderr_bytes else "Unknown error"
         raise RuntimeError(f"FFmpeg encoding failed (exit {proc.returncode}): {err_msg[-500:]}")
