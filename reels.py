@@ -197,26 +197,39 @@ def render_reel(script_data, handle, out_dir):
         "-r", str(FPS),
         "-i", "-",  # stdin pipe
         "-i", out_mp3,
+        "-filter_complex", "[1:a]apad=pad_dur=3.0[a]",
+        "-map", "0:v",
+        "-map", "[a]",
         "-c:v", "libx264",
         "-preset", "veryfast",
         "-pix_fmt", "yuv420p",
         "-c:a", "aac",
         "-b:a", "128k",
-        "-shortest",
+        "-t", f"{total_dur:.2f}",
         out_mp4
     ]
 
     print("[reels] Encoding 1080x1920 video with FFmpeg...")
-    proc = subprocess.Popen(cmd, stdin=subprocess.PIPE, stderr=subprocess.DEVNULL)
+    proc = subprocess.Popen(cmd, stdin=subprocess.PIPE, stderr=subprocess.PIPE)
 
     total_frames = int(total_dur * FPS)
-    for frame_idx in range(total_frames):
-        t = frame_idx / FPS
-        frame = _draw_frame(t, total_dur, blocks, handle)
-        proc.stdin.write(frame.tobytes())
+    try:
+        for frame_idx in range(total_frames):
+            t = frame_idx / FPS
+            frame = _draw_frame(t, total_dur, blocks, handle)
+            proc.stdin.write(frame.tobytes())
+    except (BrokenPipeError, OSError):
+        pass
+    finally:
+        try:
+            proc.stdin.close()
+        except Exception:
+            pass
 
-    proc.stdin.close()
-    proc.wait()
+    _, stderr_bytes = proc.communicate()
+    if proc.returncode != 0:
+        err_msg = stderr_bytes.decode(errors="replace") if stderr_bytes else "Unknown error"
+        raise RuntimeError(f"FFmpeg encoding failed (exit {proc.returncode}): {err_msg[-500:]}")
 
     print(f"[reels] Reel created successfully at: {out_mp4} ({os.path.getsize(out_mp4) / 1024:.0f} KB)")
     return out_mp4

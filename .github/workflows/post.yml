@@ -57,7 +57,7 @@ jobs:
             if [ "${{ inputs.dry_run }}" = "true" ]; then
               DRY_FLAG="--dry-run"
             fi
-            python main.py --once $DRY_FLAG --type "${{ inputs.post_type }}"
+            python main.py --once --force $DRY_FLAG --type "${{ inputs.post_type }}"
           else
             HOUR=$(date -u +%H)
             if [ "$HOUR" -ge 12 ]; then

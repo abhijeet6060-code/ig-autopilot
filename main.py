@@ -16,9 +16,9 @@ import trends as trends_mod
 import uploader
 
 
-def run_once(force_draft=False, post_type="carousel"):
-    if db.published_last_24h() >= config.MAX_POSTS_PER_DAY:
-        print("[main] Daily post cap reached, skipping.")
+def run_once(force_draft=False, post_type="carousel", force=False):
+    if not force and db.published_last_24h() >= config.MAX_POSTS_PER_DAY:
+        print(f"[main] Daily post cap ({config.MAX_POSTS_PER_DAY}) reached, skipping. (Use --force to override)")
         return
 
     niches = [n.strip() for n in config.get("NICHES", "AI,business").split(",")]
@@ -82,9 +82,9 @@ def run_once(force_draft=False, post_type="carousel"):
     print(f"[main] Published! media id {media_id}: {chosen.title}")
 
 
-def safe_run(force_draft=False, post_type="carousel"):
+def safe_run(force_draft=False, post_type="carousel", force=False):
     try:
-        run_once(force_draft, post_type=post_type)
+        run_once(force_draft, post_type=post_type, force=force)
     except Exception:
         traceback.print_exc()
 
@@ -95,6 +95,7 @@ if __name__ == "__main__":
     ap.add_argument("--dry-run", action="store_true", help="never post, only save a draft")
     ap.add_argument("--daemon", action="store_true", help="run on POST_TIMES forever")
     ap.add_argument("--reel", action="store_true", help="generate/publish a 9:16 vertical Reel instead of carousel")
+    ap.add_argument("--force", action="store_true", help="force run even if daily post cap is reached")
     ap.add_argument("--type", choices=["carousel", "reel", "auto"], default=None,
                     help="override post type (default: carousel or config POST_TYPE)")
     args = ap.parse_args()
@@ -108,10 +109,10 @@ if __name__ == "__main__":
             ptype = chosen_type
             if chosen_type == "auto":
                 ptype = "carousel" if idx == 0 else "reel"
-            schedule.every().day.at(t).do(safe_run, args.dry_run, ptype)
+            schedule.every().day.at(t).do(safe_run, args.dry_run, ptype, args.force)
         print(f"[main] Scheduled daily at {', '.join(times)} (server local time). Type={chosen_type}, AUTO_POST={config.AUTO_POST}")
         while True:
             schedule.run_pending()
             time.sleep(30)
     else:
-        run_once(args.dry_run, post_type=chosen_type)
+        run_once(args.dry_run, post_type=chosen_type, force=args.force)
