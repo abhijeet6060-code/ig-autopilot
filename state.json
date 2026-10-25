@@ -247,6 +247,14 @@
       "media_id": "17903223435369652",
       "status": "published",
       "created_at": 1792861033.8322268
+    },
+    {
+      "source_url": "https://simedw.com/2026/10/21/world-model-terminal/",
+      "title": "WorldTUI: I trained a 360M model to pretend to be a terminal",
+      "caption": "Most teams are paying frontier model prices for tasks that need a fraction of the compute.\n\nA developer just proved this by training a 360M parameter model—WorldTUI—to simulate a complete terminal interface entirely inside the model weights, with no underlying operating system running.\n\nThis highlights an important shift for builders. We are moving from bloated general models to ultra-focused, tiny world models. They run on-device, cost next to nothing, and execute specific logic reliably.\n\nIf you are building AI agents or workflow tools today, where are you still overpaying for massive models when a fine-tuned small model would do the job?\n\nSource: Hacker News\n\n#artificialintelligence #machinelearning #softwareengineering #techexecutive #buildinpublic #startups #developers #cloudcomputing",
+      "media_id": "18013027901992029",
+      "status": "published",
+      "created_at": 1792917785.3916805
     }
   ]
 }
