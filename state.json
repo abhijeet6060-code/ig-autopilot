@@ -287,6 +287,14 @@
       "media_id": "18011019422776388",
       "status": "published",
       "created_at": 1793092823.5008297
+    },
+    {
+      "source_url": "https://j11g.com/the-mythical-man-month-in-the-age-of-ai",
+      "title": "The Mythical Man-Month in the Age of AI",
+      "caption": "The 'Mythical Man-Month' isn't just a classic software development book; it's a stark warning for every AI founder. When your AI project hits a wall, the instinct is often to add more resources. But AI's unique complexities—from data quality to model deployment—can quickly turn a larger team into a communication nightmare, slowing progress instead of accelerating it. Before you expand, optimize your processes and clarify your architecture. Is your team structured for speed or for complexity?\nWhat's your biggest lesson learned from scaling an AI project?\n\nSource: Hacker News\n\n#AI #ArtificialIntelligence #FounderTips #TechLeadership #ProjectManagement #AIStrategy #StartupLife #BusinessLessons #BuildingAI #ProductDevelopment",
+      "media_id": "18185714923421797",
+      "status": "published",
+      "created_at": 1793127389.2197413
     }
   ]
 }
