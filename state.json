@@ -295,6 +295,14 @@
       "media_id": "18185714923421797",
       "status": "published",
       "created_at": 1793127389.2197413
+    },
+    {
+      "source_url": "https://stanforddaily.com/2026/10/27/professors-books-pirated-to-train-claude/",
+      "title": "Anthropic trained Claude on illegally obtained Stanford professors' books",
+      "caption": "The latest AI scandal hits hard: Anthropic's Claude allegedly trained on illegally obtained Stanford books.\n\nThis news highlights a critical, often overlooked, aspect of AI development: the source of training data. If true, using copyrighted material without permission creates massive legal and ethical challenges for AI companies and their users.\n\nFor founders and businesses, this isn't just a headline. It's a stark reminder to scrutinize the provenance of any AI model you integrate or build upon. Due diligence on data licensing is paramount to avoid future liabilities and maintain trust.\n\nWhat are your thoughts on data sourcing for large language models? How do you ensure ethical AI use in your business?\n\nSource: Hacker News\n\n#AIethics #DataProvenance #AIlaw #LLM #Anthropic #ClaudeAI #BusinessAI #TechEthics #IntellectualProperty #AIdevelopment",
+      "media_id": "18109606598219284",
+      "status": "published",
+      "created_at": 1793181556.4531393
     }
   ]
 }
