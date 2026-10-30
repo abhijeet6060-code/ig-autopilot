@@ -335,6 +335,14 @@
       "media_id": "18113146475146096",
       "status": "published",
       "created_at": 1793355983.1616428
+    },
+    {
+      "source_url": "https://phorion.io/blog/offical-claude-code-vsx-compromise/",
+      "title": "Backdoor in Claude Code for VS Code extension on the Cursor Marketplace",
+      "caption": "The news about a backdoor in a Claude Code VS Code extension on the Cursor Marketplace is a stark reminder. We often rush to adopt AI tools for productivity, but overlook the security implications. This isn't just a developer issue; it's a business risk. Your team's chosen extensions can be direct conduits to your IP. Don't let convenience compromise your security. What's your process for vetting new AI tools? 🔒\n\nSource: Hacker News\n\n#AIsecurity #FounderTips #Cybersecurity #AItools #BusinessRisk #TechSecurity #StartupLife #AIethics #DataProtection #DevSecOps",
+      "media_id": "18469457515142058",
+      "status": "published",
+      "created_at": 1793386294.3629313
     }
   ]
 }
