@@ -367,6 +367,14 @@
       "media_id": "18151780951554551",
       "status": "published",
       "created_at": 1793530045.1353595
+    },
+    {
+      "source_url": "https://twitter.com/jiahaoshao1/status/2116475922190922088",
+      "title": "Anthropic blocks users for anything touching training larger models",
+      "caption": "Anthropic's latest move: blocking users who train larger models. This isn't just a policy update; it's a critical signal for any founder building with AI. Your choice of foundational model isn't just about performance, it's about control and futureproofing your development. Ignoring terms of service can lead to unexpected shutdowns and wasted resources. Stay ahead. What's your backup plan if your primary AI provider changes their rules? 👇\n\nSource: Hacker News\n\n#AI #ArtificialIntelligence #TechFounder #StartupLife #AIStrategy #LLM #Anthropic #BusinessTech #FounderTips #AINews",
+      "media_id": "18022211159945038",
+      "status": "published",
+      "created_at": 1793558017.9667418
     }
   ]
 }
