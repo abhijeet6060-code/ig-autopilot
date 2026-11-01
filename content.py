@@ -21,39 +21,70 @@ Rules:
 PROMPT = """Trending stories right now:
 {listing}
 
+Write an engaging, high-converting Instagram Carousel breakdown for a tech founder / executive audience.
+Format style: Punchy, actionable, high-retention creator format (short bold titles, 3 concise checkmark bullets, and an interactive comment CTA).
+
 Return JSON with exactly this shape:
 {{
   "skip": false,
   "chosen_index": <int index from the list>,
-  "image_prompt": "<cinematic 3D render description for background visual, e.g. futuristic digital art of founder looking at glowing holographic AI brain in dark space with neon cyan particles, 8k octane render>",
-  "cover_hook": "<max 12 words, scroll-stopping headline, honest>",
-  "cover_highlight_cyan": "<1-3 words from cover_hook to highlight in glowing cyan>",
-  "cover_highlight_orange": "<1-3 words from cover_hook to highlight in glowing orange>",
-  "cards": [
-    {{"icon": "doc", "line1": "Reads &", "line2": "understands docs"}},
-    {{"icon": "lightbulb", "line1": "Solves complex", "line2": "problems"}},
-    {{"icon": "code", "line1": "Writes", "line2": "code"}},
-    {{"icon": "doc", "line1": "Creates visuals", "line2": "& designs"}},
-    {{"icon": "chat", "line1": "Holds natural", "line2": "dialogue"}},
-    {{"icon": "globe", "line1": "Searches &", "line2": "researches live"}},
-    {{"icon": "calendar", "line1": "Automates multi-", "line2": "step tasks"}},
-    {{"icon": "chart", "line1": "Finds data", "line2": "& insights"}}
+  "cover_hook": "<full title, max 8 words, e.g. 'THE 7 FREE AI TOOLS'>",
+  "cover_title_main": "<1-3 words in black/white, e.g. 'THE 7 FREE'>",
+  "cover_title_accent": "<1-3 words in electric accent, e.g. 'AI TOOLS'>",
+  "cover_subtitle": "<1-line punchy subtitle, max 8 words, e.g. 'All verified for 2026 workflows.'>",
+  "cover_bullets": [
+    "<bullet 1, max 4 words, e.g. 'Direct prompt links'>",
+    "<bullet 2, max 4 words, e.g. 'Zero setup required'>",
+    "<bullet 3, max 4 words, e.g. 'Best founder use cases'>"
   ],
-  "doodle_note": "<short provocative 1-line thought, max 7 words>",
-  "footer_takeaway": "<bold 1-line truth, max 7 words>",
-  "footer_subtext": "<1-line explanation, max 10 words>",
   "slides": [
-    {{"tag": "WHAT HAPPENED", "title": "<max 7 words>", "body": "<max 35 words>", "takeaway": "<1-line key point, max 12 words>"}},
-    {{"tag": "WHY IT MATTERS", "title": "<max 7 words>", "body": "<max 35 words>", "takeaway": "<1-line key point, max 12 words>"}},
-    {{"tag": "ACTION PLAYBOOK", "title": "<max 7 words>", "body": "<max 35 words>", "takeaway": "<1-line key point, max 12 words>"}}
+    {{
+      "tag": "WHAT HAPPENED",
+      "title_main": "<1-3 words in black/white, e.g. 'OFFICIAL'>",
+      "title_accent": "<1-3 words in accent, e.g. 'ETHICS RULES'>",
+      "subtitle": "<1-line context, max 8 words>",
+      "bullets": [
+        "<bullet 1: key fact, max 6 words>",
+        "<bullet 2: key requirement, max 6 words>",
+        "<bullet 3: who is affected, max 6 words>"
+      ],
+      "takeaway": "<1-line punchy founder rule, max 10 words>"
+    }},
+    {{
+      "tag": "WHY IT MATTERS",
+      "title_main": "<1-3 words in black/white, e.g. 'THE BIG'>",
+      "title_accent": "<1-3 words in accent, e.g. 'INDUSTRY SHIFT'>",
+      "subtitle": "<1-line context, max 8 words>",
+      "bullets": [
+        "<bullet 1: why this changes things, max 6 words>",
+        "<bullet 2: where risk is created, max 6 words>",
+        "<bullet 3: what competitors miss, max 6 words>"
+      ],
+      "takeaway": "<1-line punchy founder rule, max 10 words>"
+    }},
+    {{
+      "tag": "ACTION PLAYBOOK",
+      "title_main": "<1-3 words in black/white, e.g. 'YOUR 3-STEP'>",
+      "title_accent": "<1-3 words in accent, e.g. 'PLAYBOOK'>",
+      "subtitle": "<1-line context, max 8 words>",
+      "bullets": [
+        "<action step 1, max 6 words>",
+        "<action step 2, max 6 words>",
+        "<action step 3, max 6 words>"
+      ],
+      "takeaway": "<1-line punchy founder rule, max 10 words>"
+    }}
   ],
+  "cta_keyword": "<single all-caps keyword for comment button, e.g. 'TOOLS' or 'PROMPT' or 'SYSTEM' or 'SCALE'>",
+  "cta_subtext": "<1-line promise, e.g. 'I\\'LL SEND YOU THE COMPLETE GUIDE.'>",
   "caption": "<hook line, 2-4 short paragraphs, question to drive comments, max 1500 chars>",
   "hashtags": ["<6 to 10 relevant hashtags without #>"]
 }}
 
-"cards" must have 6 to 8 items summarizing the key dimensions or capabilities.
-"slides" must have 3 to 5 items covering: what happened, why it matters, what to do about it.
-If none of the stories are good or safe to post about, return {{"skip": true}}."""
+Rules:
+- "slides" must have 3 to 4 items covering what happened, why it matters, and action steps.
+- Keep bullets punchy (3 to 6 words each), NEVER long paragraphs.
+- If none of the stories are good or safe to post about, return {{"skip": true}}."""
 
 
 def _gemini(system, prompt):
@@ -113,10 +144,44 @@ def _validate(data, n):
         raise ValueError("Expected 3-5 slides")
     idx = data.get("chosen_index")
     if not isinstance(idx, int) or not (0 <= idx < n):
-        raise ValueError("Invalid chosen_index")
+        data["chosen_index"] = 0
     for key in ("cover_hook", "caption", "hashtags"):
         if not data.get(key):
             raise ValueError(f"Missing {key}")
+
+    # Normalize creator format fields
+    hook = data["cover_hook"]
+    if not data.get("cover_title_main") or not data.get("cover_title_accent"):
+        words = hook.split()
+        half = max(1, len(words) // 2)
+        data["cover_title_main"] = " ".join(words[:half]).upper()
+        data["cover_title_accent"] = " ".join(words[half:]).upper()
+
+    if not data.get("cover_subtitle"):
+        data["cover_subtitle"] = "The complete breakdown for founders."
+
+    if not data.get("cover_bullets") or len(data["cover_bullets"]) < 3:
+        data["cover_bullets"] = ["Direct verified facts", "Actionable takeaways", "Best founder use cases"]
+
+    if not data.get("cta_keyword"):
+        data["cta_keyword"] = "TOOLS"
+
+    if not data.get("cta_subtext"):
+        data["cta_subtext"] = "I'LL SEND YOU THE COMPLETE GUIDE."
+
+    for s in data["slides"]:
+        title = s.get("title", s.get("title_main", "BREAKDOWN"))
+        if not s.get("title_main") or not s.get("title_accent"):
+            words = title.split()
+            half = max(1, len(words) // 2)
+            s["title_main"] = " ".join(words[:half]).upper()
+            s["title_accent"] = " ".join(words[half:]).upper()
+        if not s.get("bullets"):
+            body = s.get("body", "")
+            raw = [p.strip() for p in re.split(r"[,.;]\s*", body) if p.strip()]
+            s["bullets"] = raw[:3] if len(raw) >= 3 else (raw + ["Verified impact", "Strategic takeaway"])[:3]
+        if not s.get("takeaway"):
+            s["takeaway"] = "Focus on defensible execution, not hype."
 
 
 def generate(trends):
