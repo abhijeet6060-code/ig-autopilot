@@ -383,6 +383,14 @@
       "media_id": "18116454545016744",
       "status": "published",
       "created_at": 1793559921.6111643
+    },
+    {
+      "source_url": "https://nolanlawson.com/2026/10/28/the-ai-cost-of-javascript-frameworks/",
+      "title": "The AI cost of JavaScript frameworks",
+      "caption": "Are your JavaScript frameworks secretly draining your AI budget? 💸\n\nThe hidden costs of integrating AI into existing (or new) JavaScript frameworks are often overlooked. It's not just about the model; it's about how your chosen tech stack facilitates or hinders that integration.\n\nFrom increased development time to complex deployment pipelines, the wrong framework choice can turn an innovative AI project into a financial drag. This directly impacts your project ROI and team efficiency.\n\nSmart founders are now auditing their tech stacks with an 'AI lens.' It’s about more than just features – it’s about optimizing for future-proof, cost-effective AI development. ✅\n\nWhat frameworks are you finding most (or least) AI-friendly? Share your insights below!\n\nSource: Hacker News\n\n#AI #ArtificialIntelligence #TechStack #JavaScript #Frameworks #SoftwareDevelopment #FounderLife #BusinessStrategy #TechLeadership #AIcost",
+      "media_id": "18134196601757726",
+      "status": "published",
+      "created_at": 1793608954.398727
     }
   ]
 }
