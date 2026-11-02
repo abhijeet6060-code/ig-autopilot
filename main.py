@@ -49,8 +49,8 @@ def run_once(force_draft=False, post_type="carousel", force=False, theme_idx=Non
 
         try:
             video_url = uploader.upload(video_path)
-            pub_res = publisher.publish_reel(video_url, caption)
-            media_id = pub_res.get("instagram") or pub_res.get("facebook")
+            pub_res = publisher.publish_reel(video_url, caption, local_video_path=video_path)
+            media_id = pub_res.get("instagram") or pub_res.get("facebook") or pub_res.get("linkedin")
         finally:
             uploader.cleanup()
         db.record(chosen.url, chosen.title, caption, media_id, "published")
@@ -77,8 +77,8 @@ def run_once(force_draft=False, post_type="carousel", force=False, theme_idx=Non
 
     try:
         urls = [uploader.upload(p) for p in paths]
-        pub_res = publisher.publish_carousel(urls, caption)
-        media_id = pub_res.get("instagram") or pub_res.get("facebook")
+        pub_res = publisher.publish_carousel(urls, caption, local_image_paths=paths)
+        media_id = pub_res.get("instagram") or pub_res.get("facebook") or pub_res.get("linkedin")
     finally:
         uploader.cleanup()
     db.record(chosen.url, chosen.title, caption, media_id, "published")
