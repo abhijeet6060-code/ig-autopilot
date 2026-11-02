@@ -11,6 +11,7 @@ import content
 import db
 import images
 import instagram
+import publisher
 import reels
 import trends as trends_mod
 import uploader
@@ -48,11 +49,12 @@ def run_once(force_draft=False, post_type="carousel", force=False, theme_idx=Non
 
         try:
             video_url = uploader.upload(video_path)
-            media_id = instagram.publish_reel(video_url, caption)
+            pub_res = publisher.publish_reel(video_url, caption)
+            media_id = pub_res.get("instagram") or pub_res.get("facebook")
         finally:
             uploader.cleanup()
         db.record(chosen.url, chosen.title, caption, media_id, "published")
-        print(f"[main] Reel published! media id {media_id}: {chosen.title}")
+        print(f"[main] Reel finished publishing cycle: {chosen.title}")
         return
 
     data = content.generate(found)
@@ -75,11 +77,12 @@ def run_once(force_draft=False, post_type="carousel", force=False, theme_idx=Non
 
     try:
         urls = [uploader.upload(p) for p in paths]
-        media_id = instagram.publish(urls, caption)
+        pub_res = publisher.publish_carousel(urls, caption)
+        media_id = pub_res.get("instagram") or pub_res.get("facebook")
     finally:
         uploader.cleanup()
     db.record(chosen.url, chosen.title, caption, media_id, "published")
-    print(f"[main] Published! media id {media_id}: {chosen.title}")
+    print(f"[main] Carousel finished publishing cycle: {chosen.title}")
 
 
 def safe_run(force_draft=False, post_type="carousel", force=False, theme_idx=None):
