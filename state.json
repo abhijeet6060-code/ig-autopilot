@@ -407,6 +407,14 @@
       "media_id": "17930296671180704",
       "status": "published",
       "created_at": 1793658527.8932343
+    },
+    {
+      "source_url": "https://github.com/postmanlabs/postman-app-support/issues/14370",
+      "title": "Postman silently auto-installs AI plugins and attempts to share all API data",
+      "caption": "Heads up, founders. A recent report about Postman, a tool many teams rely on daily, is a stark reminder about data security. It alleges silent AI plugin installation and attempts to share API data. This isn't just a tech detail; it's a potential breach of trust and a significant risk to your business's sensitive information. Every tool in your stack, especially those handling core data, needs scrutiny. Don't assume default settings are secure. Understand their data policies, check permissions, and protect your IP. How do you vet the tools your team uses?\n\nSource: Hacker News\n\n#AIData #DataSecurity #API #DevTools #FounderAdvice #BusinessTech #PrivacyMatters #StartupFounder #TechEthics #Cybersecurity",
+      "media_id": "18093183683215203",
+      "status": "published",
+      "created_at": 1793737149.2622766
     }
   ]
 }
