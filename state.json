@@ -439,6 +439,14 @@
       "media_id": "18112988831180737",
       "status": "published",
       "created_at": 1793878002.2898607
+    },
+    {
+      "source_url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxQTGRzTGJsV0ZFVVJ6NXlkNnB3emVFcDJmOGhCUjFsZTJEVWxJS3VxN1JDZ1VLOUVRSzZXTGJiTEV4LTR3TGFfQi1aeHhpdF9SY0hoZlUtSVByVDU1N2tyakZfdlk3ZEhFR21CdUI0dHg0ZjVXMDVfWUtNaGVZVTE5Z1hMMUxtNVZmN2dWN2FXdkFGcTkyYnFrOGpTRThrWHBtNDNQQ1EwU2pTeFhibVpVNlZyb0J6YXlwdjUtaA?oc=5",
+      "title": "How Amazon Marketplace evaluates content quality with Amazon SageMaker AI - Amazon Web Services (AWS)",
+      "caption": "Amazon's latest move reveals a critical shift in content strategy. They're using SageMaker AI to evaluate content quality on their Marketplace. This isn't just about AI generating text; it's about AI enforcing standards at scale.\n\nFor founders, this means your product listings, images, and descriptions on major platforms are likely being assessed by algorithms. It’s a wake-up call to integrate AI into your content workflow for more than just creation. Think compliance, quality, and optimization.\n\nHow are you currently using AI to validate your content? Share your strategies below. 👇\n\nSource: Google News: AI\n\n#AIforFounders #BusinessAI #ContentQuality #AmazonMarketplace #SageMaker #AIStrategy #TechForBusiness #FounderLife #AIAutomation #DigitalCommerce",
+      "media_id": "18101771405394475",
+      "status": "published",
+      "created_at": 1793911888.4774652
     }
   ]
 }
