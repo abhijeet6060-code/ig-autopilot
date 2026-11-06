@@ -447,6 +447,14 @@
       "media_id": "18101771405394475",
       "status": "published",
       "created_at": 1793911888.4774652
+    },
+    {
+      "source_url": "https://github.com/anthropics/claude-code/issues/107757",
+      "title": "Claude Code sends your email address to websites",
+      "caption": "Your AI tools could be silently leaking sensitive data. A recent discovery reveals Claude's code interpreter may send user email addresses to third-party websites without explicit consent. This isn't just a minor bug; it's a critical vulnerability that impacts data privacy and compliance.\n\nFor founders and executives, this highlights a severe risk. Every AI tool integrated into your workflow carries potential exposure. Relying on default settings is no longer an option. You need to understand exactly what data your AI is processing and where it's going.\n\nThis incident demands immediate action. Beyond just Claude, it's a wake-up call for how we vet and manage all AI integrations. Data breaches erode trust and can lead to significant regulatory penalties. Your business reputation is on the line.\n\nAre you confident your current AI stack is secure? What steps are you taking to ensure data privacy with your AI tools?\n\nComment 'AUDIT' below, and I'll send you a concise AI Privacy Checklist to help you assess your current setup.\n\nSource: Hacker News\n\n#AIsecurity #dataprivacy #techfounder #AItools #businessAI #cybersecurity #startup #founderlife #AIethics #techleadership",
+      "media_id": "18233719489335010",
+      "status": "published",
+      "created_at": 1793964358.8143654
     }
   ]
 }
