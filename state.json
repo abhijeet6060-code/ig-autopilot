@@ -479,6 +479,14 @@
       "media_id": "17950543785347704",
       "status": "published",
       "created_at": 1794075558.1837025
+    },
+    {
+      "source_url": "https://apiiro.com/blog/coding-agents-leaking-secrets-github-dont-ask-again",
+      "title": "Claude Code's \"Don't Ask Again\" exposes passwords in 1,122 public GitHub files",
+      "caption": "Your AI development tools might be leaking sensitive data.\n\nA feature in Claude Code, \"Don't Ask Again,\" has exposed passwords and API keys across 1,122 public GitHub files. This isn't a hypothetical threat; it's a confirmed vulnerability.\n\nFor founders and tech leaders, this highlights a critical blind spot. The convenience of AI-powered development tools must be weighed against their potential to introduce severe security risks. Every tool processing your code needs rigorous vetting.\n\nIt's a sharp reminder: AI integration isn't just about efficiency. It's about understanding the new attack vectors it creates. Prioritize security audits and credential management now.\n\nWhat's your top concern with AI tools and data security?\n\nSource: Hacker News\n\n#AIsecurity #Cybersecurity #TechFounder #GitHub #ClaudeAI #DataLeak #DevTools #StartupSecurity #AIethics #RiskManagement",
+      "media_id": "17866462599694597",
+      "status": "published",
+      "created_at": 1794134685.324272
     }
   ]
 }
