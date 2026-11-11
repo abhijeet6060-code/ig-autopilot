@@ -519,6 +519,14 @@
       "media_id": "17884896144533679",
       "status": "published",
       "created_at": 1794343071.7069824
+    },
+    {
+      "source_url": "https://evanxmerz.com/post/ai-usage-generates-a-fragile-codebase/",
+      "title": "AI usage generates a fragile codebase",
+      "caption": "Are you relying on AI to write your code? You might be building a ticking time bomb.\n\nNew insights reveal that codebases generated with AI often suffer from inherent fragility. While AI speeds up development, it can introduce issues that lead to rapid code decay and significantly increase future maintenance burdens. This isn't just about minor bugs; it's about the fundamental stability of your product.\n\nThe problem lies in the often-opaque nature of AI-generated solutions. Dependencies can be hidden, design patterns inconsistent, and the overall architecture less robust than human-engineered code. This translates directly to higher technical debt and slower iteration cycles down the line.\n\nHow are you validating your AI-generated code? Share your strategies below!\n\nSource: Hacker News\n\n#AIdevelopment #TechFounders #CodeQuality #SoftwareEngineering #AIDeveloper #TechnicalDebt #AIinBusiness #StartupLife #DevOps #FutureofWork",
+      "media_id": "17961402381014896",
+      "status": "published",
+      "created_at": 1794396397.042755
     }
   ]
 }
