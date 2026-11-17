@@ -615,6 +615,14 @@
       "media_id": "18606258418067977",
       "status": "published",
       "created_at": 1794918254.9619718
+    },
+    {
+      "source_url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxNQVg3V1dEQVNwMUFueGFmczVVUzE2RUd4UUtkNWtBakFoMG9ILVhNU1M3WXVZSXNXdlpYRzFfVWx0X3pKX3NuM1RXckowRzktMUpzWHphbUJZWlJXX2ZOTk9JOE44U1hnNDZudU10dVI2UWhQV3hWcHNWVHpTLU4zV2VUZFAyZkFhYS1BWUVET3h4SHpyNW96aXdYVUxpMHZPeXRUMVc5LWM?oc=5",
+      "title": "Cut generative AI costs: Code for rules, models for judgment - Amazon Web Services (AWS)",
+      "caption": "Generative AI costs are a silent killer for many startups and enterprises. 💸 AWS recently published a practical framework for cutting these costs. The core idea is to differentiate between tasks that can be handled by deterministic code (rules) and those requiring the nuanced judgment of large language models.\n\nThis isn't about avoiding AI; it's about smart deployment. By segmenting your AI workloads, you ensure you're not paying premium model prices for tasks a simple IF/THEN statement could handle. It's an engineering problem with a clear financial upside.\n\nAre you actively optimizing your Gen AI spend, or is it a black box? Comment 'OPTIMIZE' and I'll share the key principles from the AWS strategy. 👇\n\nSource: Google News: AI\n\n#AIStrategies #AICostOptimization #GenerativeAI #AWSCloud #TechFounder #BusinessAI #AIforBusiness #StartupTips #TechLeadership #Efficiency",
+      "media_id": "18131285089855824",
+      "status": "published",
+      "created_at": 1794952480.6491895
     }
   ]
 }
