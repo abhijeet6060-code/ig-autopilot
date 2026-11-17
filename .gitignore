@@ -1,4 +1,5 @@
 .env
 output/
+scratch/
 __pycache__/
 *.pyc
