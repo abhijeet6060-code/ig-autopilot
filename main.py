@@ -110,11 +110,7 @@ if __name__ == "__main__":
     if args.daemon:
         times = config.POST_TIMES
         for idx, t in enumerate(times):
-            # If auto, schedule Morning as Carousel and Evening as Reel!
-            ptype = chosen_type
-            if chosen_type == "auto":
-                ptype = "carousel" if idx == 0 else "reel"
-            schedule.every().day.at(t).do(safe_run, args.dry_run, ptype, args.force, args.theme)
+            schedule.every().day.at(t).do(safe_run, args.dry_run, chosen_type, args.force, args.theme)
         print(f"[main] Scheduled daily at {', '.join(times)} (server local time). Type={chosen_type}, AUTO_POST={config.AUTO_POST}")
         while True:
             schedule.run_pending()

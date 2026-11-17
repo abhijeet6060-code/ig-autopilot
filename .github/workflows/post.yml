@@ -14,10 +14,9 @@ on:
         description: "Content format to publish"
         type: choice
         options:
-          - reel
           - carousel
-          - auto
-        default: reel
+          - reel
+        default: carousel
 
 permissions:
   contents: write
@@ -63,14 +62,8 @@ jobs:
             fi
             python main.py --once --force $DRY_FLAG --type "${{ inputs.post_type }}"
           else
-            HOUR=$(date -u +%H)
-            if [ "$HOUR" -ge 12 ]; then
-              echo "Evening run detected: Generating and publishing Reel..."
-              python main.py --once --type reel
-            else
-              echo "Morning run detected: Generating and publishing Carousel..."
-              python main.py --once --type carousel
-            fi
+            echo "Scheduled run: Generating and publishing Image Carousel..."
+            python main.py --once --type carousel
           fi
 
       - name: Upload drafts for review
