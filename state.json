@@ -647,6 +647,14 @@
       "media_id": "17970277368211700",
       "status": "published",
       "created_at": 1795089883.1722167
+    },
+    {
+      "source_url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxNb1hXYzNBYld2UHJXclpZOE1LWkFJb2VvUlUxN2FHQ0ZMZS1MQld6eGNGbUlNZURrMnNwR1FlemMwTzJ5Y201aXM4bEt0TkhkY3pwWG5tT2tJQ0dtYmVtWk1OejJDWkFzUkxvRGlxSnR2YVNtWl9ybl85c2pCekIxc3BYc1o4RExINUlpcVVfd2p1UF9fSEdHeFVKenlDcEVkbjhZY1YwU1Z0T2duM3VZZzdhNzZpd3ZWTUk2RTln?oc=5",
+      "title": "Optimize AI economics on Amazon Bedrock with Accenture’s sequenced approach - Amazon Web Services (AWS)",
+      "caption": "Most teams build AI features first and check the cloud bill later. That is how software margins collapse.\n\nAWS and Accenture just highlighted a sequenced approach to AI economics on Amazon Bedrock. The fundamental reality: you cannot run every enterprise workflow through the most expensive frontier models without breaking unit economics.\n\nTo protect margins, sequence your architecture deliberately:\n1. Model tiering: Route simple classification to small models and reserve top-tier models for complex tasks.\n2. Semantic caching: Stop paying repeatedly for identical prompt embeddings.\n3. User metering: Set hard usage boundaries and cost-per-tenant monitoring.\n\nAre your AI infrastructure costs scaling faster than your revenue?\n\nSource: Google News: AI\n\n#ArtificialIntelligence #AWSBedrock #CloudCosts #TechFounders #EnterpriseAI #UnitEconomics #StartupStrategy",
+      "media_id": "18019308302975615",
+      "status": "published",
+      "created_at": 1795124922.8498182
     }
   ]
 }
