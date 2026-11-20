@@ -663,6 +663,14 @@
       "media_id": "18052865675817494",
       "status": "published",
       "created_at": 1795176407.120258
+    },
+    {
+      "source_url": "https://architectlabs.com/blog/frostbite",
+      "title": "Frostbite: A new CPU architecture discovered, designed and verified by AI",
+      "caption": "AI just designed a new CPU architecture. This isn't just a software story anymore.\n\nFor the first time, an AI system has discovered, designed, and verified a new CPU architecture, named \"Frostbite.\" This isn't theoretical; it's a concrete demonstration of AI's ability to create foundational hardware.\n\nThe implications are massive. We're moving beyond AI assisting human designers to AI autonomously generating complex engineering solutions. This could accelerate innovation cycles, reduce development costs, and fundamentally reshape industries reliant on custom silicon.\n\nAs founders and executives, understanding this shift is critical. How will AI-driven design impact your product roadmap, supply chain resilience, and competitive edge? The companies that embrace AI as a core engineering partner will lead.\n\nWhat's your take on AI designing hardware? Comment 'DESIGN' below for resources on integrating advanced AI into your engineering strategy.\n\nSource: Hacker News\n\n#AIHardware #ChipDesign #FutureOfTech #AIInnovation #DeepTech #TechFounder #BusinessStrategy #AIandBusiness #Engineering #Innovation",
+      "media_id": "18113776250628455",
+      "status": "published",
+      "created_at": 1795210272.7616656
     }
   ]
 }
