@@ -671,6 +671,14 @@
       "media_id": "18113776250628455",
       "status": "published",
       "created_at": 1795210272.7616656
+    },
+    {
+      "source_url": "https://signal.org/blog/protecting-your-privacy/",
+      "title": "Restricting AI agents in mobile operating systems platforms from capturing data",
+      "caption": "Mobile OS platforms are tightening the reins on AI agent data capture. This isn't just a technical tweak; it's a fundamental shift in how AI can operate within the most common user environments.\n\nFor founders and executives, this signals a critical need to reassess data strategies and product roadmaps. The implications are clear: broad, unrestricted data access for AI agents on mobile is becoming a thing of the past.\n\nThis pushes innovation towards privacy-preserving AI models and more transparent data practices. Ignoring these changes risks non-compliance, limited product functionality, and user distrust. It's time to adapt.\n\nHow are you rethinking your AI's data strategy? Comment \"DATA\" below.\n\nSource: Hacker News\n\n#AI #TechFounder #BusinessStrategy #MobileAI #DataPrivacy #AIEthics #PlatformEconomy #ProductDevelopment #TechNews #FounderLife",
+      "media_id": "17970550677196972",
+      "status": "published",
+      "created_at": 1795261208.1517863
     }
   ]
 }
