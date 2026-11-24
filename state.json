@@ -711,6 +711,14 @@
       "media_id": "17989833411086899",
       "status": "published",
       "created_at": 1795440822.0165365
+    },
+    {
+      "source_url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxQQWVHLWI2RnpUOEpLdGVnTkRidUdXUmVZMHJmaTk5QmM0c2E1U0FWNjZzTnRfVWtxcDA1V1EyTjNjUi1oTjV0YUpBVWFBaVNiY0YzR2szN2hubkgyUzJwQk9hTVdoSm5zRTZtZzY2S2ZRLWc5dWNJSUxiQkpIWXpuRXlNZnZQNS1LbF8xalVWUEJidlFsYTFMYnNLMXVLSUU?oc=5",
+      "title": "Inside the Black Market for America’s Artificial Intelligence - Lawfare",
+      "caption": "Export controls were meant to restrict access to advanced AI chips. Instead, they birthed a complex black market.\n\nA recent Lawfare report highlights how restricted hardware and cloud access are quietly routed through third-party intermediaries and shadow data centers.\n\nFor tech founders and executives, this is not just foreign policy news. Scrutiny is moving up the stack. KYC requirements for compute providers are tightening, and API resale channels face increasing regulatory pressure. If your compute supply chain relies on questionable third parties, you inherit the compliance risk.\n\nAudit your providers, track your compute lineage, and ensure your infrastructure is clean.\n\nAre you vetting your compute providers' hardware origins? Comment COMPUTE and I'll send our infrastructure compliance checklist.\n\nSource: Google News: AI\n\n#artificialintelligence #aistartups #cloudcomputing #techbusiness #deeptech #aipolicy #startuplife #techfounders",
+      "media_id": "18102517034665361",
+      "status": "published",
+      "created_at": 1795482722.9827507
     }
   ]
 }
