@@ -759,6 +759,14 @@
       "media_id": "18140275018648811",
       "status": "published",
       "created_at": 1795698236.5846164
+    },
+    {
+      "source_url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxPaHNyTTBaZE5ydGtvODFGS0Jra2F2Rl9lSUlnZVAzTWJfZndkWklTTFJ3UlQ5ckk4dnhyUzBUd3d4Q3JoWDI5M2M5dEs3VzdwLWk4cnBmVjBGby1WVnVoYmpsTnozaXJyWEVjRGEtcFRMSUVKRG1vUWpmNVh0RWNMR2M5RHZJNzd6VnU3TVV6V3oxMV9FZDVZOTNkbUNzSmtENWlPdXJERXpndEM3M1JaUlozNlF4b05faC0xSg?oc=5",
+      "title": "Pentagon Hand Caroline Zier Now Leads OpenAI's Limits on Military Artificial Intelligence - Broadband Breakfast",
+      "caption": "OpenAI's latest move isn't just news; it's a blueprint.\n\nCaroline Zier, a former Pentagon official, is now leading OpenAI’s efforts to limit military applications of its AI. This isn't a minor update. It’s a strategic decision by a leading AI developer.\n\nFor founders and executives, this signals a critical shift. The most powerful AI models are developing internal guardrails, especially concerning sensitive sectors. This isn't about what AI *can* do, but what it *shouldn't*.\n\nYour company's AI strategy needs to reflect this. What are your red lines? How are you proactively addressing ethical use cases and potential misuse? Ignoring these questions is no longer an option.\n\nHow are you embedding ethical considerations into your AI development pipeline? Comment \"ETHICS\" below, and I'll share a framework for building responsible AI.\n\nSource: Google News: AI\n\n#AIethics #OpenAI #AIGovernance #TechPolicy #ResponsibleAI #FounderStrategy #AIforBusiness #FutureofAI #DeepTech #BusinessStrategy",
+      "media_id": "18003422760009170",
+      "status": "published",
+      "created_at": 1795732566.8437977
     }
   ]
 }
