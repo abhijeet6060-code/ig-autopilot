@@ -751,6 +751,14 @@
       "media_id": "18029309153945936",
       "status": "published",
       "created_at": 1795646741.954954
+    },
+    {
+      "source_url": "https://twitter.com/thsottiaux/status/2125784147889393806",
+      "title": "OpenAI cuts GPT-6.2 usage: Astra hits limits 40% faster, Sol 25% faster",
+      "caption": "OpenAI just hit the brakes on its most advanced models.\n\nWhat does it mean when GPT-6.2 Astra and Sol are hitting usage limits faster? It means the reality of scaling cutting-edge AI is complex. Demand is high, and infrastructure isn't limitless. For founders and executives, this isn't just a technical detail—it's a critical operational signal.\n\nYour AI strategy needs to account for resource constraints and potential cost spikes. Relying solely on one provider or one model without a backup plan is a risk. This event underscores the need for diversification, efficient model use, and a clear understanding of your AI spend.\n\nHow are you adapting your AI strategy to these new realities? Let me know.\n\nSource: Hacker News\n\n#AIStrategy #OpenAI #GPT6 #TechFounder #BusinessAI #AIInnovation #ScalingAI #AILeadership #TechNews #AIUpdates",
+      "media_id": "18140275018648811",
+      "status": "published",
+      "created_at": 1795698236.5846164
     }
   ]
 }
