@@ -21,69 +21,41 @@ Rules:
 PROMPT = """Trending stories right now:
 {listing}
 
-Write an engaging, high-converting Instagram Carousel breakdown for a tech founder / executive audience.
-Format style: Punchy, actionable, high-retention creator format (short bold titles, 3 concise checkmark bullets, and an interactive comment CTA).
+Write an Instagram carousel in a bold, editorial "how-to" style for a founder / operator audience.
+Tone: calm, confident, specific. Sentence case. Short sentences. Every headline ends with a period.
+Structure: a cover promise, 3-4 numbered steps, two "rule" statements, then a comment CTA.
 
 Return JSON with exactly this shape:
 {{
   "skip": false,
   "chosen_index": <int index from the list>,
-  "cover_hook": "<full title, max 8 words, e.g. 'THE 7 FREE AI TOOLS'>",
-  "cover_title_main": "<1-3 words in black/white, e.g. 'THE 7 FREE'>",
-  "cover_title_accent": "<1-3 words in electric accent, e.g. 'AI TOOLS'>",
-  "cover_subtitle": "<1-line punchy subtitle, max 8 words, e.g. 'All verified for 2026 workflows.'>",
-  "cover_bullets": [
-    "<bullet 1, max 4 words, e.g. 'Direct prompt links'>",
-    "<bullet 2, max 4 words, e.g. 'Zero setup required'>",
-    "<bullet 3, max 4 words, e.g. 'Best founder use cases'>"
-  ],
+  "cover_headline": "<Title Case promise, 4-8 words, e.g. 'How Founders Use AI Agents to Ship Faster'>",
+  "cover_kicker": "<one italic line, max 9 words, ends with a period, e.g. 'The 3 moves that actually save time.'>",
+  "cover_hook": "<same as cover_headline>",
   "slides": [
     {{
-      "tag": "WHAT HAPPENED",
-      "title_main": "<1-3 words in black/white, e.g. 'OFFICIAL'>",
-      "title_accent": "<1-3 words in accent, e.g. 'ETHICS RULES'>",
-      "subtitle": "<1-line context, max 8 words>",
-      "bullets": [
-        "<bullet 1: key fact, max 6 words>",
-        "<bullet 2: key requirement, max 6 words>",
-        "<bullet 3: who is affected, max 6 words>"
-      ],
-      "takeaway": "<1-line punchy founder rule, max 10 words>"
-    }},
-    {{
-      "tag": "WHY IT MATTERS",
-      "title_main": "<1-3 words in black/white, e.g. 'THE BIG'>",
-      "title_accent": "<1-3 words in accent, e.g. 'INDUSTRY SHIFT'>",
-      "subtitle": "<1-line context, max 8 words>",
-      "bullets": [
-        "<bullet 1: why this changes things, max 6 words>",
-        "<bullet 2: where risk is created, max 6 words>",
-        "<bullet 3: what competitors miss, max 6 words>"
-      ],
-      "takeaway": "<1-line punchy founder rule, max 10 words>"
-    }},
-    {{
-      "tag": "ACTION PLAYBOOK",
-      "title_main": "<1-3 words in black/white, e.g. 'YOUR 3-STEP'>",
-      "title_accent": "<1-3 words in accent, e.g. 'PLAYBOOK'>",
-      "subtitle": "<1-line context, max 8 words>",
-      "bullets": [
-        "<action step 1, max 6 words>",
-        "<action step 2, max 6 words>",
-        "<action step 3, max 6 words>"
-      ],
-      "takeaway": "<1-line punchy founder rule, max 10 words>"
+      "kicker": "Step 1",
+      "headline": "<the step as an instruction, 4-8 words, ends with a period>",
+      "body": "<1-2 plain sentences explaining it, max 26 words>",
+      "panel_label": "<2-3 word label for the list, e.g. 'Start with', 'What changes', 'Do this'>",
+      "bullets": ["<max 5 words>", "<max 5 words>", "<max 5 words>"],
+      "takeaway": "<one rule, max 10 words>"
     }}
   ],
-  "cta_keyword": "<single all-caps keyword for comment button, e.g. 'TOOLS' or 'PROMPT' or 'SYSTEM' or 'SCALE'>",
-  "cta_subtext": "<1-line promise, e.g. 'I\\'LL SEND YOU THE COMPLETE GUIDE.'>",
+  "statements": [
+    "<rule 1, 10-16 words, pattern 'Your X controls Y, so Z.'>",
+    "<rule 2, 10-16 words, same pattern, contrasting rule 1>"
+  ],
+  "cta_keyword": "<single all-caps keyword, e.g. 'AGENT', 'PROMPT', 'SYSTEM'>",
+  "cta_subtext": "<one line promise, e.g. 'I'll send you my agent setup checklist.'>",
   "caption": "<hook line, 2-4 short paragraphs, question to drive comments, max 1500 chars>",
   "hashtags": ["<6 to 10 relevant hashtags without #>"]
 }}
 
 Rules:
-- "slides" must have 3 to 4 items covering what happened, why it matters, and action steps.
-- Keep bullets punchy (3 to 6 words each), NEVER long paragraphs.
+- "slides" must have 3 to 4 items, kicker "Step 1", "Step 2", ... in order.
+- Steps must be things the reader can do; ground them in the chosen story.
+- Bullets are 2-5 words each, never full sentences.
 - If none of the stories are good or safe to post about, return {{"skip": true}}."""
 
 
@@ -145,6 +117,10 @@ def _validate(data, n):
     idx = data.get("chosen_index")
     if not isinstance(idx, int) or not (0 <= idx < n):
         data["chosen_index"] = 0
+    if not data.get("cover_hook"):
+        data["cover_hook"] = data.get("cover_headline", "")
+    if not data.get("cover_headline"):
+        data["cover_headline"] = data.get("cover_hook", "")
     for key in ("cover_hook", "caption", "hashtags"):
         if not data.get(key):
             raise ValueError(f"Missing {key}")
@@ -169,8 +145,12 @@ def _validate(data, n):
     if not data.get("cta_subtext"):
         data["cta_subtext"] = "I'LL SEND YOU THE COMPLETE GUIDE."
 
-    for s in data["slides"]:
-        title = s.get("title", s.get("title_main", "BREAKDOWN"))
+    for n, s in enumerate(data["slides"], 1):
+        s.setdefault("kicker", f"Step {n}")
+        legacy = f"{s.get('title_main', '')} {s.get('title_accent', '')}".strip()
+        title = s.get("headline") or s.get("title") or legacy.capitalize() or "Breakdown"
+        if not s.get("headline"):
+            s["headline"] = title
         if not s.get("title_main") or not s.get("title_accent"):
             words = title.split()
             half = max(1, len(words) // 2)
