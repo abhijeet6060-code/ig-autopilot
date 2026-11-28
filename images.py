@@ -1,7 +1,8 @@
 """Bold Swiss-editorial carousel generator (1080x1350, 4:5).
 
 Design system (one place, every slide reads from it):
-- Colours: Yellow #FED700, Ink #0B0909, Graphite #393939, Amber #EBB02A, Paper #EDEDED
+- Colours: 6 rotating primary palettes (Yellow, Azure, Coral Pink, Grey, Lime,
+  Lavender), each with a matching dark tone; Paper #EDEDED panels throughout
 - Type: Inter variable (Black / ExtraBold / Bold / Medium / Regular), tight negative
   tracking on display sizes, faux-oblique italics for kickers and statements.
 - Layouts:
@@ -25,6 +26,37 @@ AMBER = (235, 176, 42)
 PAPER = (237, 237, 237)
 WHITE = (255, 255, 255)
 MUTED_ON_INK = (190, 190, 186)
+
+
+def _hex(h):
+    h = h.lstrip("#")
+    return tuple(int(h[i:i + 2], 16) for i in (0, 2, 4))
+
+
+# Primary palettes. One is picked per post so the feed rotates colour.
+#   primary    background of cover + statement slides
+#   on_primary text on primary
+#   dark       background of step + outro slides
+#   accent     headline colour on dark, CTA pill, brand mark
+#   accent2    second list marker colour
+PALETTES = [
+    {"name": "Signal Yellow", "primary": "#FED700", "on_primary": "#0B0909", "dark": "#0B0909", "accent": "#FED700", "accent2": "#EBB02A"},
+    {"name": "Azure",         "primary": "#1F6FEB", "on_primary": "#FFFFFF", "dark": "#06132B", "accent": "#5CA8FF", "accent2": "#A9CDFF"},
+    {"name": "Coral Pink",    "primary": "#FF6F6F", "on_primary": "#140708", "dark": "#1A0B0D", "accent": "#FF8C86", "accent2": "#FFC1BB"},
+    {"name": "Concrete Grey", "primary": "#D4D4CF", "on_primary": "#111111", "dark": "#18181A", "accent": "#FF4B2B", "accent2": "#9E9E98"},
+    {"name": "Acid Lime",     "primary": "#C6F135", "on_primary": "#0C1006", "dark": "#0D1108", "accent": "#C6F135", "accent2": "#8DB51C"},
+    {"name": "Lavender",      "primary": "#B7A3FF", "on_primary": "#120C26", "dark": "#110D22", "accent": "#B7A3FF", "accent2": "#8A70F5"},
+]
+PALETTES = [{k: (_hex(v) if k != "name" else v) for k, v in pal.items()} for pal in PALETTES]
+
+
+def pick_palette(theme_idx=None, now=None):
+    """Explicit index wins; otherwise advance one palette every 12h (= every post at 2/day)."""
+    import time
+    if theme_idx is not None:
+        return PALETTES[theme_idx % len(PALETTES)]
+    slot = int((now or time.time()) // (12 * 3600))
+    return PALETTES[slot % len(PALETTES)]
 
 FONT_FILE = "fonts/Inter.ttf"
 FALLBACKS = {
@@ -148,13 +180,13 @@ def draw_block(base, x, y, lines, f, size, fill, tracking=0, leading=1.0, italic
 
 # ---------------------------------------------------------------- chrome
 
-def _chrome(base, handle, index, total, on_dark):
+def _chrome(base, th, handle, index, total, on_dark):
     """Small top/bottom furniture shared by every slide."""
-    fg = MUTED_ON_INK if on_dark else INK
+    fg = MUTED_ON_INK if on_dark else th["on_primary"]
     f = font(600, 26)
     d = ImageDraw.Draw(base)
     # top-left brand square + handle
-    d.rectangle([MARGIN, 64, MARGIN + 22, 86], fill=YELLOW if on_dark else INK)
+    d.rectangle([MARGIN, 64, MARGIN + 22, 86], fill=th["accent"] if on_dark else th["on_primary"])
     d.text((MARGIN + 38, 60), handle, font=f, fill=fg)
     # top-right counter
     counter = f"{index:02d} / {total:02d}"
@@ -172,8 +204,8 @@ def _chrome(base, handle, index, total, on_dark):
 
 # ---------------------------------------------------------------- slides
 
-def _cover(data, handle, index, total):
-    base = Image.new("RGB", (W, H), YELLOW)
+def _cover(th, data, handle, index, total):
+    base = Image.new("RGB", (W, H), th["primary"])
     headline = data.get("cover_headline") or data.get("cover_hook", "")
     kicker = data.get("cover_kicker") or data.get("cover_subtitle", "")
 
@@ -181,19 +213,19 @@ def _cover(data, handle, index, total):
     f, s, tr, lines = fit(headline, 900, box_w, 820, list(range(200, 79, -6)), leading=0.98)
     block_h = len(lines) * s * 0.98
     y = 190 + max(0, (820 - block_h) * 0.55)
-    y = draw_block(base, MARGIN - s * 0.03, y, lines, f, s, INK, tr, leading=0.98)
+    y = draw_block(base, MARGIN - s * 0.03, y, lines, f, s, th["on_primary"], tr, leading=0.98)
 
     if kicker:
         fk = font(800, 46)
         kl = wrap(kicker, fk, box_w - 40, -1)
-        draw_block(base, MARGIN, y + 46, kl, fk, 46, INK, -1, leading=1.2, italic=True)
+        draw_block(base, MARGIN, y + 46, kl, fk, 46, th["on_primary"], -1, leading=1.2, italic=True)
 
-    _chrome(base, handle, index, total, on_dark=False)
+    _chrome(base, th, handle, index, total, on_dark=False)
     return base
 
 
-def _step(slide, step_no, handle, index, total):
-    base = Image.new("RGB", (W, H), INK)
+def _step(th, slide, step_no, handle, index, total):
+    base = Image.new("RGB", (W, H), th["dark"])
     box_w = W - 2 * MARGIN
 
     label = slide.get("kicker") or f"Step {step_no}"
@@ -202,7 +234,7 @@ def _step(slide, step_no, handle, index, total):
 
     headline = slide.get("headline") or f"{slide.get('title_main', '')} {slide.get('title_accent', '')}".strip()
     f, s, tr, lines = fit(headline, 800, box_w, 250, list(range(84, 51, -4)), leading=1.08, max_lines=3)
-    y = draw_block(base, MARGIN, y + 40, lines, f, s, YELLOW, tr, leading=1.08)
+    y = draw_block(base, MARGIN, y + 40, lines, f, s, th["accent"], tr, leading=1.08)
 
     body = slide.get("body") or slide.get("subtitle", "")
     if body:
@@ -227,17 +259,17 @@ def _step(slide, step_no, handle, index, total):
             num = f"{i + 1:02d}"
             fn = font(900, 64)
             draw_line(base, MARGIN + 40, ry + 6, num, fn, INK, -3)
-            d.rectangle([MARGIN + 40, ry + 82, MARGIN + 74, ry + 88], fill=AMBER if i % 2 else YELLOW)
+            d.rectangle([MARGIN + 40, ry + 82, MARGIN + 74, ry + 88], fill=th["accent2"] if i % 2 else th["accent"])
             fbt = font(700, 40)
             bl = wrap(b, fbt, W - MARGIN - 220 - 40, -1)[:2]
             draw_block(base, MARGIN + 180, ry + 26, bl, fbt, 40, INK, -1, leading=1.18)
 
-    _chrome(base, handle, index, total, on_dark=True)
+    _chrome(base, th, handle, index, total, on_dark=True)
     return base
 
 
-def _statement(statements, handle, index, total):
-    base = Image.new("RGB", (W, H), YELLOW)
+def _statement(th, statements, handle, index, total):
+    base = Image.new("RGB", (W, H), th["primary"])
     box_w = W - 2 * MARGIN - 40
     statements = [s for s in statements if s][:2]
     # Pick one size that fits both statements together.
@@ -259,21 +291,21 @@ def _statement(statements, handle, index, total):
     f, s, tr, blocks, total_h = chosen
     y = (H - total_h) / 2
     for b in blocks:
-        y = draw_block(base, MARGIN + 10, y, b, f, s, INK, tr, leading=1.12, italic=True)
+        y = draw_block(base, MARGIN + 10, y, b, f, s, th["on_primary"], tr, leading=1.12, italic=True)
         y += s * 1.3
-    _chrome(base, handle, index, total, on_dark=False)
+    _chrome(base, th, handle, index, total, on_dark=False)
     return base
 
 
-def _outro(data, handle, index, total):
-    base = Image.new("RGB", (W, H), INK)
+def _outro(th, data, handle, index, total):
+    base = Image.new("RGB", (W, H), th["dark"])
     box_w = W - 2 * MARGIN
     kw = (data.get("cta_keyword") or "GUIDE").upper().strip()
 
     y = draw_block(base, MARGIN, 220, ["Want the full playbook?"], font(500, 48), 48, WHITE, -1, italic=True)
 
     f, s, tr, lines = fit(f"Comment “{kw}”", 900, box_w, 380, list(range(170, 71, -6)), leading=1.0, max_lines=2)
-    y = draw_block(base, MARGIN - s * 0.03, y + 50, lines, f, s, YELLOW, tr, leading=1.0)
+    y = draw_block(base, MARGIN - s * 0.03, y + 50, lines, f, s, th["accent"], tr, leading=1.0)
 
     sub = data.get("cta_subtext") or "I'll send you the complete guide."
     sub = sub[0].upper() + sub[1:].lower() if sub.isupper() else sub
@@ -289,10 +321,10 @@ def _outro(data, handle, index, total):
     pill_y = top + 210
     fh = font(700, 34)
     pw = d.textlength(handle, font=fh) + 64
-    d.rounded_rectangle([MARGIN, pill_y, MARGIN + pw, pill_y + 72], radius=36, fill=YELLOW)
+    d.rounded_rectangle([MARGIN, pill_y, MARGIN + pw, pill_y + 72], radius=36, fill=th["accent"])
     d.text((MARGIN + 32, pill_y + 15), handle, font=fh, fill=INK)
 
-    _chrome(base, handle, index, total, on_dark=True)
+    _chrome(base, th, handle, index, total, on_dark=True)
     return base
 
 
@@ -307,8 +339,9 @@ def _statements_for(data):
 
 
 def render(data, source_name, handle, out_dir, theme_idx=None):
-    """Renders the carousel; returns slide paths. `theme_idx` kept for CLI compatibility."""
+    """Renders the carousel; returns slide paths. `theme_idx` forces a palette (0-5)."""
     os.makedirs(out_dir, exist_ok=True)
+    theme = pick_palette(theme_idx)
     steps = data.get("slides", [])
     statements = _statements_for(data)
     plan = [("cover", None)] + [("step", s) for s in steps]
@@ -316,20 +349,20 @@ def render(data, source_name, handle, out_dir, theme_idx=None):
         plan.append(("statement", statements))
     plan.append(("outro", None))
     total = len(plan)
-    print(f"[images] Rendering Swiss-editorial carousel ({total} slides, 1080x1350)")
+    print(f"[images] Rendering Swiss-editorial carousel ({total} slides, 1080x1350, palette: {theme['name']})")
 
     paths = []
     step_no = 0
     for i, (kind, payload) in enumerate(plan, 1):
         if kind == "cover":
-            img = _cover(data, handle, i, total)
+            img = _cover(theme, data, handle, i, total)
         elif kind == "step":
             step_no += 1
-            img = _step(payload, step_no, handle, i, total)
+            img = _step(theme, payload, step_no, handle, i, total)
         elif kind == "statement":
-            img = _statement(payload, handle, i, total)
+            img = _statement(theme, payload, handle, i, total)
         else:
-            img = _outro(data, handle, i, total)
+            img = _outro(theme, data, handle, i, total)
         p = os.path.join(out_dir, f"slide_{i}.jpg")
         img.convert("RGB").save(p, "JPEG", quality=95, subsampling=0)
         paths.append(p)

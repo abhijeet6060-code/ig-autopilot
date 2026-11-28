@@ -100,7 +100,7 @@ if __name__ == "__main__":
     ap.add_argument("--reel", action="store_true", help="generate/publish a 9:16 vertical Reel instead of carousel")
     ap.add_argument("--force", action="store_true", help="force run even if daily post cap is reached")
     ap.add_argument("--theme", type=int, choices=[0, 1, 2, 3, 4, 5], default=None,
-                    help="override carousel color theme (0=Monday Lavender, 1=Tuesday Ice Blue, 2=Wednesday Mint, 3=Thursday Butter, 4=Friday Peach, 5=Weekend Midnight)")
+                    help="force carousel palette (0=Yellow, 1=Azure, 2=Coral Pink, 3=Grey, 4=Lime, 5=Lavender); default rotates every post")
     ap.add_argument("--type", choices=["carousel", "reel", "auto"], default=None,
                     help="override post type (default: carousel or config POST_TYPE)")
     args = ap.parse_args()
