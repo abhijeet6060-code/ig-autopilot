@@ -300,29 +300,27 @@ def _statement(th, statements, handle, index, total):
 def _outro(th, data, handle, index, total):
     base = Image.new("RGB", (W, H), th["dark"])
     box_w = W - 2 * MARGIN
-    kw = (data.get("cta_keyword") or "GUIDE").upper().strip()
 
-    y = draw_block(base, MARGIN, 220, ["Want the full playbook?"], font(500, 48), 48, WHITE, -1, italic=True)
+    y = draw_block(base, MARGIN, 300, ["Found this useful?"], font(500, 48), 48, WHITE, -1, italic=True)
 
-    f, s, tr, lines = fit(f"Comment “{kw}”", 900, box_w, 380, list(range(170, 71, -6)), leading=1.0, max_lines=2)
-    y = draw_block(base, MARGIN - s * 0.03, y + 50, lines, f, s, th["accent"], tr, leading=1.0)
+    f, s, tr, lines = fit("Follow us", 900, box_w, 400, list(range(220, 99, -6)), leading=0.98, max_lines=2)
+    y = draw_block(base, MARGIN - s * 0.03, y + 56, lines, f, s, th["accent"], tr, leading=0.98)
 
-    sub = data.get("cta_subtext") or "I'll send you the complete guide."
-    sub = sub[0].upper() + sub[1:].lower() if sub.isupper() else sub
-    fb = font(400, 40)
-    y = draw_block(base, MARGIN, y + 40, wrap(sub, fb, box_w, -1)[:3], fb, 40, (232, 232, 228), -1, leading=1.3)
+    fb = font(400, 42)
+    sub = "Daily AI playbooks for founders, in plain language."
+    y = draw_block(base, MARGIN, y + 44, wrap(sub, fb, box_w - 60, -1), fb, 42, (232, 232, 228), -1, leading=1.3)
 
-    # Follow card
+    # Handle pill
     d = ImageDraw.Draw(base)
-    top = H - 380
-    d.rectangle([MARGIN, top, W - MARGIN, top + 2], fill=GRAPHITE)
-    draw_block(base, MARGIN, top + 60, ["Follow for daily AI"], font(800, 52), 52, WHITE, -2)
-    draw_block(base, MARGIN, top + 130, ["playbooks for founders."], font(800, 52), 52, WHITE, -2)
-    pill_y = top + 210
-    fh = font(700, 34)
-    pw = d.textlength(handle, font=fh) + 64
-    d.rounded_rectangle([MARGIN, pill_y, MARGIN + pw, pill_y + 72], radius=36, fill=th["accent"])
-    d.text((MARGIN + 32, pill_y + 15), handle, font=fh, fill=INK)
+    pill_y = int(y + 56)
+    fh = font(700, 38)
+    pw = d.textlength(handle, font=fh) + 72
+    d.rounded_rectangle([MARGIN, pill_y, MARGIN + pw, pill_y + 80], radius=40, fill=th["accent"])
+    d.text((MARGIN + 36, pill_y + 17), handle, font=fh, fill=INK)
+
+    # Quiet secondary actions at the bottom
+    d.rectangle([MARGIN, H - 190, W - MARGIN, H - 188], fill=GRAPHITE)
+    d.text((MARGIN, H - 160), "Save this post  ·  Share it with a founder", font=font(500, 30), fill=MUTED_ON_INK)
 
     _chrome(base, th, handle, index, total, on_dark=True)
     return base

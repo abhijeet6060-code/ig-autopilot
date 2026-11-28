@@ -23,7 +23,7 @@ PROMPT = """Trending stories right now:
 
 Write an Instagram carousel in a bold, editorial "how-to" style for a founder / operator audience.
 Tone: calm, confident, specific. Sentence case. Short sentences. Every headline ends with a period.
-Structure: a cover promise, 3-4 numbered steps, two "rule" statements, then a comment CTA.
+Structure: a cover promise, 3-4 numbered steps, two "rule" statements, then a follow CTA.
 
 Return JSON with exactly this shape:
 {{
@@ -46,9 +46,7 @@ Return JSON with exactly this shape:
     "<rule 1, 10-16 words, pattern 'Your X controls Y, so Z.'>",
     "<rule 2, 10-16 words, same pattern, contrasting rule 1>"
   ],
-  "cta_keyword": "<single all-caps keyword, e.g. 'AGENT', 'PROMPT', 'SYSTEM'>",
-  "cta_subtext": "<one line promise, e.g. 'I'll send you my agent setup checklist.'>",
-  "caption": "<hook line, 2-4 short paragraphs, question to drive comments, max 1500 chars>",
+  "caption": "<hook line, 2-4 short paragraphs, end with a question and 'Follow {handle} for more.', max 1500 chars>",
   "hashtags": ["<6 to 10 relevant hashtags without #>"]
 }}
 
@@ -170,7 +168,7 @@ def generate(trends):
         for i, t in enumerate(trends)
     )
     system = SYSTEM.format(voice=config.BRAND_VOICE, handle=config.HANDLE)
-    prompt = PROMPT.format(listing=listing)
+    prompt = PROMPT.format(listing=listing, handle=config.HANDLE)
     last_err = None
     for _ in range(3):  # free models occasionally return bad JSON; retry
         try:
